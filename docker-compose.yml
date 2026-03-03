@@ -8,10 +8,11 @@ services:
     networks:
       - mynet123
     healthcheck:
-      test: ["CMD", "mysqladmin", "ping", "-h", "localhost", "-pschnappie"]
+      test: ["CMD-SHELL", "mysqladmin ping -h 127.0.0.1 -pschnappie --silent"]
       interval: 5s
       timeout: 3s
-      retries: 30
+      retries: 40
+      start_period: 30s
 
   api:
     container_name: wissquiz_api
@@ -20,14 +21,16 @@ services:
     ports:
       - "8080:8080"
     environment:
-      MYSQL_HOST: wissquiz_db
+      MYSQL_HOST: db
       ENV_VAR: OK
     depends_on:
       db:
         condition: service_healthy
+    restart: unless-stopped
     networks:
       - mynet123
-        
+
 networks:
   mynet123:
     name: mynet123
+    driver: bridge
