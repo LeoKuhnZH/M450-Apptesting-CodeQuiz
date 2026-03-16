@@ -10,6 +10,8 @@ import ch.wiss.wiss_quiz.model.Category;
 import ch.wiss.wiss_quiz.model.CategoryRepository;
 import ch.wiss.wiss_quiz.model.Question;
 import ch.wiss.wiss_quiz.model.QuestionRepository;
+import ch.wiss.wiss_quiz.model.Answer;
+import ch.wiss.wiss_quiz.model.AnswerRepository;
 
 @Service
 public class QuizService {
@@ -64,4 +66,42 @@ public class QuizService {
 
         return pickQuizQuestions(questions, 3);
     }
+    public boolean validateQuestionForQuiz(Question question) {
+
+        if (question == null) {
+            return false;
+        }
+
+        String questionText = question.getQuestion();
+        if (questionText == null || questionText.trim().isEmpty()) {
+            return false;
+        }
+
+        List<Answer> answers = question.getAnswers();
+        if (answers == null || answers.size() < 2) {
+            return false;
+        }
+
+        int correctAnswers = 0;
+
+        for (Answer answer : answers) {
+
+            if (answer == null) {
+                return false;
+            }
+
+            String answerText = answer.getAnswer();
+
+            if (answerText == null || answerText.trim().isEmpty()) {
+                return false;
+            }
+
+            if (answer.isCorrect()) {
+                correctAnswers++;
+            }
+        }
+
+        return correctAnswers == 1;
+    }    
+
 }

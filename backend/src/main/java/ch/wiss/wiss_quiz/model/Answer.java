@@ -20,8 +20,8 @@ public class Answer {
 	private Integer id;
 	
 	private String answer;
-	private Boolean correct;
-	
+	private boolean correct;
+
 	@ManyToOne(fetch = FetchType.LAZY, optional = false)
 	@JoinColumn(name = "question_id", nullable = false)
 	@JsonBackReference
@@ -43,11 +43,11 @@ public class Answer {
 		this.answer = answer;
 	}
 
-	public Boolean getCorrect() {
+	public boolean isCorrect() {
 		return correct;
 	}
 
-	public void setCorrect(Boolean correct) {
+	public void setCorrect(boolean correct) {
 		this.correct = correct;
 	}
 

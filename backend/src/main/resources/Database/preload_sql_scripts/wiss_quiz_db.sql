@@ -32,7 +32,7 @@ DROP TABLE IF EXISTS `answer`;
 CREATE TABLE `answer` (
   `id` int NOT NULL AUTO_INCREMENT,
   `answer` varchar(255) DEFAULT NULL,
-  `correct` bit(1) DEFAULT NULL,
+  `correct` TINYINT(1) NOT NULL,
   `question_id` int DEFAULT NULL,
   PRIMARY KEY (`id`),
   KEY `FK8frr4bcabmmeyyu60qt7iiblo` (`question_id`),
