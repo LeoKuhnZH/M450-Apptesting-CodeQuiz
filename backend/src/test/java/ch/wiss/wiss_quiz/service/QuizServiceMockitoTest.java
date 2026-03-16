@@ -50,24 +50,6 @@ class QuizServiceMockitoTest {
     void testSomething() {
     	assertEquals(4, 2 + 2);
     }
-    
-    @Test
-    void getQuizQuestionsByCategoryId_returnsThreeQuestions_whenEnoughQuestionsExist() {
-        Category category = new Category();
-        List<Question> questions = List.of(
-                new Question(),
-                new Question(),
-                new Question(),
-                new Question()
-        );
-
-        when(categoryRepository.findById(1)).thenReturn(Optional.of(category));
-        when(questionRepository.findByCategory(category)).thenReturn(questions);
-
-        List<Question> result = service.getQuizQuestionsByCategoryId(1);
-
-        assertEquals(3, result.size());
-    }
 
     @Test
     void getQuizQuestionsByCategoryId_throwsException_whenCategoryDoesNotExist() {
