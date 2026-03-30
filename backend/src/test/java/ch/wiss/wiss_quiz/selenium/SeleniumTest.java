@@ -175,7 +175,10 @@ class SeleniumTest {
     // ============================  
     @Test
     void selectCategory_and_answerFirstQuestion_correctly() {
-
+    	// Tipp:
+    	// - Combobox = Select
+    	// - Klasse: org.openqa.selenium.support.ui.Select
+    	
         // TODO:
         // 1. Öffne die Seite (Startseite, nicht /quiz!)
         // 2. Finde die Kategorie-Combobox
