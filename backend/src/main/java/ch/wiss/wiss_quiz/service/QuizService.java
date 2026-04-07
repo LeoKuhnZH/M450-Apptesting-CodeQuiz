@@ -1,17 +1,12 @@
 package ch.wiss.wiss_quiz.service;
 
+import ch.wiss.wiss_quiz.model.*;
+import org.springframework.stereotype.Service;
+
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 import java.util.Random;
-
-import org.springframework.stereotype.Service;
-
-import ch.wiss.wiss_quiz.model.Category;
-import ch.wiss.wiss_quiz.model.CategoryRepository;
-import ch.wiss.wiss_quiz.model.Question;
-import ch.wiss.wiss_quiz.model.QuestionRepository;
-import ch.wiss.wiss_quiz.model.Answer;
 
 @Service
 public class QuizService {
@@ -33,8 +28,8 @@ public class QuizService {
         List<Question> copy = new ArrayList<>(questions);
 
         if (copy.size() > maxQuestions) {
-        	Random random = new Random(42); // set random seed for predictable results for Selenium-tests
-        	Collections.shuffle(copy, random);            
+            Random random = new Random(42); // set random seed for predictable results for Selenium-tests
+            Collections.shuffle(copy, random);
         }
         int limit = Math.min(copy.size(), maxQuestions);
         return copy.subList(0, limit);
@@ -70,7 +65,7 @@ public class QuizService {
 
         return pickQuizQuestions(validQuestions, 3);
     }
-    
+
     public boolean validateQuestionForQuiz(Question question) {
 
         if (question == null) {
@@ -107,8 +102,8 @@ public class QuizService {
         }
 
         return correctAnswers == 1;
-    }    
-    
+    }
+
     public boolean categoryHasEnoughValidQuestions(Integer categoryId, int requiredCount) {
 
         if (categoryId == null || requiredCount <= 0) {
@@ -125,7 +120,7 @@ public class QuizService {
 
         return validCount >= requiredCount;
     }
-    
+
     public int countValidQuestions(List<Question> questions) {
 
         if (questions == null || questions.isEmpty()) {

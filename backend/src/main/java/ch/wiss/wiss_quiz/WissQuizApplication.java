@@ -10,15 +10,15 @@ import org.springframework.web.bind.annotation.RestController;
 @SpringBootApplication
 public class WissQuizApplication {
 
-	 @Value("#{systemEnvironment['ENV_VAR'] ?: '$ENV_VAR has not been set'}")
-	 private String envVar;
-	
-	public static void main(String[] args) {
-		SpringApplication.run(WissQuizApplication.class, args);
-	}
+    @Value("#{systemEnvironment['ENV_VAR'] ?: '$ENV_VAR has not been set'}")
+    private String envVar;
 
-	@GetMapping("/")
-	public String index() {
-		return "Spring Boot Wiss-Quiz REST API! " + envVar;
-	}
+    public static void main(String[] args) {
+        SpringApplication.run(WissQuizApplication.class, args);
+    }
+
+    @GetMapping("/")
+    public String index() {
+        return "Spring Boot Wiss-Quiz REST API! " + envVar;
+    }
 }

@@ -1,15 +1,14 @@
 package ch.wiss.wiss_quiz.service;
 
-import static org.junit.jupiter.api.Assertions.*;
+import ch.wiss.wiss_quiz.model.Answer;
+import ch.wiss.wiss_quiz.model.Question;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
 
 import java.util.ArrayList;
 import java.util.List;
 
-import org.junit.jupiter.api.BeforeEach;
-import org.junit.jupiter.api.Test;
-
-import ch.wiss.wiss_quiz.model.Answer;
-import ch.wiss.wiss_quiz.model.Question;
+import static org.junit.jupiter.api.Assertions.*;
 
 class QuizServiceTest {
 
@@ -203,6 +202,7 @@ class QuizServiceTest {
 
         assertFalse(result);
     }
+
     // Station 3 – Validierung von Quizfragen
     @Test
     void validateQuestionForQuiz_returnsFalse_whenAnswerTextIsBlank() {

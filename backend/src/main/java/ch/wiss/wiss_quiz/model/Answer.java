@@ -1,62 +1,55 @@
 package ch.wiss.wiss_quiz.model;
 
-import javax.persistence.Entity;
-import javax.persistence.FetchType;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
-import javax.persistence.JoinColumn;
-import javax.persistence.ManyToOne;
-import javax.persistence.Table;
-
 import com.fasterxml.jackson.annotation.JsonBackReference;
 
+import javax.persistence.*;
+
 @Entity
-@Table(name="answer")
+@Table(name = "answer")
 public class Answer {
 
-	@Id
-	@GeneratedValue(strategy=GenerationType.IDENTITY)
-	private Integer id;
-	
-	private String questionAnswer;
-	private boolean correct;
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Integer id;
 
-	@ManyToOne(fetch = FetchType.LAZY, optional = false)
-	@JoinColumn(name = "question_id", nullable = false)
-	@JsonBackReference
-	private Question question;
-	
-	public Integer getId() {
-		return id;
-	}
+    private String questionAnswer;
+    private boolean correct;
 
-	public void setId(Integer id) {
-		this.id = id;
-	}
+    @ManyToOne(fetch = FetchType.LAZY, optional = false)
+    @JoinColumn(name = "question_id", nullable = false)
+    @JsonBackReference
+    private Question question;
 
-	public String getQuestionAnswer() {
-		return questionAnswer;
-	}
+    public Integer getId() {
+        return id;
+    }
 
-	public void setQuestionAnswer(String questionAnswer) {
-		this.questionAnswer = questionAnswer;
-	}
+    public void setId(Integer id) {
+        this.id = id;
+    }
 
-	public boolean isCorrect() {
-		return correct;
-	}
+    public String getQuestionAnswer() {
+        return questionAnswer;
+    }
 
-	public void setCorrect(boolean correct) {
-		this.correct = correct;
-	}
+    public void setQuestionAnswer(String questionAnswer) {
+        this.questionAnswer = questionAnswer;
+    }
 
-	public Question getQuestion() {
-		return question;
-	}
+    public boolean isCorrect() {
+        return correct;
+    }
 
-	public void setQuestion(Question question) {
-		this.question = question;
-	}	
-	
+    public void setCorrect(boolean correct) {
+        this.correct = correct;
+    }
+
+    public Question getQuestion() {
+        return question;
+    }
+
+    public void setQuestion(Question question) {
+        this.question = question;
+    }
+
 }
