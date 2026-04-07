@@ -65,7 +65,7 @@ public class CleanCodeTrainingExamples {
 
         return result;
     }
-    
+
     // Lange Methode + mehrere Verantwortlichkeiten + schlechte Lesbarkeit
     public String processUserData(String name, int age, boolean isMember, int points) {
         String result;
@@ -90,13 +90,13 @@ public class CleanCodeTrainingExamples {
 
         return result;
     }
-    
+
     // Schlechte Parameter-Namen + unnötige Abkürzungen
     public boolean chk(int a, int b) {
         return a > b;
     }
-    
- // Schlechte Fehlerbehandlung + unklare Logik
+
+    // Schlechte Fehlerbehandlung + unklare Logik
     public int divide(int a, int b) {
         int result = 0;
 
@@ -108,8 +108,8 @@ public class CleanCodeTrainingExamples {
 
         return result;
     }
-    
- // Unnötige Komplexität + schlechte Lesbarkeit
+
+    // Unnötige Komplexität + schlechte Lesbarkeit
     public boolean isEvenAndPositive(int number) {
         if (number > 0) {
             return number % 2 == 0;
