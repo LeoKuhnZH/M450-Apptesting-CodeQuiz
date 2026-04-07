@@ -19,7 +19,7 @@ public class Answer {
 	@GeneratedValue(strategy=GenerationType.IDENTITY)
 	private Integer id;
 	
-	private String answer;
+	private String questionAnswer;
 	private boolean correct;
 
 	@ManyToOne(fetch = FetchType.LAZY, optional = false)
@@ -35,12 +35,12 @@ public class Answer {
 		this.id = id;
 	}
 
-	public String getAnswer() {
-		return answer;
+	public String getQuestionAnswer() {
+		return questionAnswer;
 	}
 
-	public void setAnswer(String answer) {
-		this.answer = answer;
+	public void setQuestionAnswer(String questionAnswer) {
+		this.questionAnswer = questionAnswer;
 	}
 
 	public boolean isCorrect() {

@@ -33,7 +33,6 @@ public class QuizService {
         List<Question> copy = new ArrayList<>(questions);
 
         if (copy.size() > maxQuestions) {
-        	//Random random = new Random();
         	Random random = new Random(42); // set random seed for predictable results for Selenium-tests
         	Collections.shuffle(copy, random);            
         }
@@ -78,7 +77,7 @@ public class QuizService {
             return false;
         }
 
-        String questionText = question.getQuestion();
+        String questionText = question.getQuestionText();
         if (questionText == null || questionText.trim().isEmpty()) {
             return false;
         }
@@ -96,7 +95,7 @@ public class QuizService {
                 return false;
             }
 
-            String answerText = answer.getAnswer();
+            String answerText = answer.getQuestionAnswer();
 
             if (answerText == null || answerText.trim().isEmpty()) {
                 return false;

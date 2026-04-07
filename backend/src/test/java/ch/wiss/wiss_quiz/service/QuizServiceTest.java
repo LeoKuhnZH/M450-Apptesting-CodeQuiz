@@ -144,7 +144,7 @@ class QuizServiceTest {
     @Test
     void validateQuestionForQuiz_returnsFalse_whenQuestionTextIsNull() {
         Question question = new Question();
-        question.setQuestion(null);
+        question.setQuestionText(null);
         question.setAnswers(createValidAnswers());
 
         boolean result = service.validateQuestionForQuiz(question);
@@ -156,7 +156,7 @@ class QuizServiceTest {
     @Test
     void validateQuestionForQuiz_returnsFalse_whenQuestionTextIsBlank() {
         Question question = new Question();
-        question.setQuestion("   ");
+        question.setQuestionText("   ");
         question.setAnswers(createValidAnswers());
 
         boolean result = service.validateQuestionForQuiz(question);
@@ -168,7 +168,7 @@ class QuizServiceTest {
     @Test
     void validateQuestionForQuiz_returnsFalse_whenAnswersAreNull() {
         Question question = new Question();
-        question.setQuestion("Frage?");
+        question.setQuestionText("Frage?");
 
         boolean result = service.validateQuestionForQuiz(question);
 
@@ -179,7 +179,7 @@ class QuizServiceTest {
     @Test
     void validateQuestionForQuiz_returnsFalse_whenLessThanTwoAnswersExist() {
         Question question = new Question();
-        question.setQuestion("Frage?");
+        question.setQuestionText("Frage?");
         question.setAnswers(List.of(createAnswer("Nur eine", true)));
 
         boolean result = service.validateQuestionForQuiz(question);
@@ -191,7 +191,7 @@ class QuizServiceTest {
     @Test
     void validateQuestionForQuiz_returnsFalse_whenAnswerIsNull() {
         Question question = new Question();
-        question.setQuestion("Frage?");
+        question.setQuestionText("Frage?");
 
         List<Answer> answers = new ArrayList<>();
         answers.add(createAnswer("A", true));
@@ -207,7 +207,7 @@ class QuizServiceTest {
     @Test
     void validateQuestionForQuiz_returnsFalse_whenAnswerTextIsBlank() {
         Question question = new Question();
-        question.setQuestion("Frage?");
+        question.setQuestionText("Frage?");
         question.setAnswers(List.of(createAnswer(" ", true), createAnswer("B", false)));
 
         boolean result = service.validateQuestionForQuiz(question);
@@ -219,7 +219,7 @@ class QuizServiceTest {
     @Test
     void validateQuestionForQuiz_returnsFalse_whenNoCorrectAnswerExists() {
         Question question = new Question();
-        question.setQuestion("Frage?");
+        question.setQuestionText("Frage?");
         question.setAnswers(List.of(createAnswer("A", false), createAnswer("B", false)));
 
         boolean result = service.validateQuestionForQuiz(question);
@@ -231,7 +231,7 @@ class QuizServiceTest {
     @Test
     void validateQuestionForQuiz_returnsFalse_whenMultipleCorrectAnswersExist() {
         Question question = new Question();
-        question.setQuestion("Frage?");
+        question.setQuestionText("Frage?");
         question.setAnswers(List.of(createAnswer("A", true), createAnswer("B", true)));
 
         boolean result = service.validateQuestionForQuiz(question);
@@ -243,7 +243,7 @@ class QuizServiceTest {
     @Test
     void validateQuestionForQuiz_returnsTrue_whenExactlyOneCorrectAnswerExists() {
         Question question = new Question();
-        question.setQuestion("Frage?");
+        question.setQuestionText("Frage?");
         question.setAnswers(createValidAnswers());
 
         boolean result = service.validateQuestionForQuiz(question);
@@ -271,15 +271,15 @@ class QuizServiceTest {
     @Test
     void countValidQuestions_countsOnlyValidQuestions() {
         Question valid1 = new Question();
-        valid1.setQuestion("Q1");
+        valid1.setQuestionText("Q1");
         valid1.setAnswers(createValidAnswers());
 
         Question valid2 = new Question();
-        valid2.setQuestion("Q2");
+        valid2.setQuestionText("Q2");
         valid2.setAnswers(createValidAnswers());
 
         Question invalid = new Question();
-        invalid.setQuestion("Q3");
+        invalid.setQuestionText("Q3");
         invalid.setAnswers(List.of(createAnswer("Only one", true)));
 
         int result = service.countValidQuestions(List.of(valid1, invalid, valid2));
@@ -296,7 +296,7 @@ class QuizServiceTest {
 
     private Answer createAnswer(String text, boolean correct) {
         Answer answer = new Answer();
-        answer.setAnswer(text);
+        answer.setQuestionAnswer(text);
         answer.setCorrect(correct);
         return answer;
     }

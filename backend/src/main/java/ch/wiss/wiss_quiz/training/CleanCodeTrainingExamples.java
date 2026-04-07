@@ -1,14 +1,20 @@
 package ch.wiss.wiss_quiz.training;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
+import java.util.Arrays;
 import java.util.List;
 
 public class CleanCodeTrainingExamples {
 
+    private static final Logger log = LoggerFactory.getLogger(CleanCodeTrainingExamples.class);
+
     // Schlechter Methodenname + unnötige Variable + verschachtelte ifs
     public String doStuff(String name, int points, boolean active) {
-        String result = "";
+        String result;
 
-        if (active == true) {
+        if (active) {
             if (points > 80) {
                 result = "User " + name + " passed";
             } else {
@@ -23,15 +29,15 @@ public class CleanCodeTrainingExamples {
 
     // Duplikation (DRY verletzt)
     public void printAdminMessage(String name) {
-        System.out.println("Hello " + name);
-        System.out.println("Welcome to WissQuiz");
-        System.out.println("Role: Admin");
+        for (String s : Arrays.asList("Hello " + name, "Welcome to WissQuiz", "Role: Admin")) {
+            log.info(s);
+        }
     }
 
     public void printTeacherMessage(String name) {
-        System.out.println("Hello " + name);
-        System.out.println("Welcome to WissQuiz");
-        System.out.println("Role: Teacher");
+        for (String s : Arrays.asList("Hello " + name, "Welcome to WissQuiz", "Role: Teacher")) {
+            log.info(s);
+        }
     }
 
     // Magic Number
@@ -47,9 +53,7 @@ public class CleanCodeTrainingExamples {
     public int calculateSomething(List<Integer> numbers) {
         int result = 0;
 
-        for (int i = 0; i < numbers.size(); i++) {
-            int n = numbers.get(i);
-
+        for (int n : numbers) {
             if (n > 0) {
                 if (n % 2 == 0) {
                     result = result + n * 2;
@@ -64,11 +68,11 @@ public class CleanCodeTrainingExamples {
     
     // Lange Methode + mehrere Verantwortlichkeiten + schlechte Lesbarkeit
     public String processUserData(String name, int age, boolean isMember, int points) {
-        String result = "";
+        String result;
 
-        if (name != null && name.length() > 0) {
+        if (name != null && !name.isEmpty()) {
             if (age > 18) {
-                if (isMember == true) {
+                if (isMember) {
                     if (points > 100) {
                         result = "Premium Member: " + name;
                     } else {
@@ -89,11 +93,7 @@ public class CleanCodeTrainingExamples {
     
     // Schlechte Parameter-Namen + unnötige Abkürzungen
     public boolean chk(int a, int b) {
-        if (a > b) {
-            return true;
-        } else {
-            return false;
-        }
+        return a > b;
     }
     
  // Schlechte Fehlerbehandlung + unklare Logik
@@ -103,7 +103,7 @@ public class CleanCodeTrainingExamples {
         try {
             result = a / b;
         } catch (Exception e) {
-            System.out.println("Error");
+            log.info("Error");
         }
 
         return result;
@@ -112,11 +112,7 @@ public class CleanCodeTrainingExamples {
  // Unnötige Komplexität + schlechte Lesbarkeit
     public boolean isEvenAndPositive(int number) {
         if (number > 0) {
-            if (number % 2 == 0) {
-                return true;
-            } else {
-                return false;
-            }
+            return number % 2 == 0;
         } else {
             return false;
         }
