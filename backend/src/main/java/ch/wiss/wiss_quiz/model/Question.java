@@ -22,7 +22,7 @@ public class Question {
 	@GeneratedValue(strategy=GenerationType.IDENTITY)
 	private Integer id;
 	
-	private String question;
+	private String questionText;
 	
 	@ManyToOne(fetch = FetchType.EAGER, optional = false)
 	@JoinColumn(name = "category_id", nullable = false)
@@ -36,12 +36,12 @@ public class Question {
 		this.id = id;
 	}
 
-	public String getQuestion() {
-		return question;
+	public String getQuestionText() {
+		return questionText;
 	}
 
-	public void setQuestion(String question) {
-		this.question = question;
+	public void setQuestionText(String questionText) {
+		this.questionText = questionText;
 	}
 	
 	public void setCategory(Category cat) {

@@ -176,7 +176,7 @@ class QuizServiceMockitoTest {
 
     private Question createValidQuestion(String text) {
         Question question = new Question();
-        question.setQuestion(text);
+        question.setQuestionText(text);
         question.setAnswers(List.of(
                 createAnswer("A", true),
                 createAnswer("B", false)
@@ -186,7 +186,7 @@ class QuizServiceMockitoTest {
 
     private Question createInvalidQuestion() {
         Question question = new Question();
-        question.setQuestion("Invalid");
+        question.setQuestionText("Invalid");
         question.setAnswers(List.of(
                 createAnswer("A", true),
                 createAnswer("B", true)
@@ -196,7 +196,7 @@ class QuizServiceMockitoTest {
 
     private Answer createAnswer(String text, boolean correct) {
         Answer answer = new Answer();
-        answer.setAnswer(text);
+        answer.setQuestionAnswer(text);
         answer.setCorrect(correct);
         return answer;
     }

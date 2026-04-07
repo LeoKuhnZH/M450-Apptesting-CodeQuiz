@@ -1,25 +1,25 @@
 package ch.wiss.wiss_quiz.controller;
 
-import java.util.List;
-
-import org.springframework.beans.factory.annotation.Autowired;
+import ch.wiss.wiss_quiz.model.Question;
+import ch.wiss.wiss_quiz.service.QuizService;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
-import ch.wiss.wiss_quiz.model.Question;
-import ch.wiss.wiss_quiz.service.QuizService;
+import java.util.List;
 
 @RestController
 @RequestMapping(path = "/quiz")
 public class QuizController {
+    private final QuizService quizService;
 
-    @Autowired
-    private QuizService quizService;
+    public QuizController(QuizService quizService) {
+        this.quizService = quizService;
+    }
 
     @GetMapping(path = "")
-    public List<Question> getQuizQuestions(@RequestParam Integer cat_id) {
-        return quizService.getQuizQuestionsByCategoryId(cat_id);
+    public List<Question> getQuizQuestions(@RequestParam Integer catId) {
+        return quizService.getQuizQuestionsByCategoryId(catId);
     }
 }
