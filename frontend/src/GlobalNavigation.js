@@ -5,7 +5,7 @@ class GlobalNavigation extends React.Component {
   constructor(props) {
     super(props);
 
-    // 🎧 Radio Stream erstellen (WICHTIG: nur 1x!)
+    
     this.radio = new Audio(
       "https://energyzuerich.ice.infomaniak.ch/energyzuerich-high.mp3"
     );
