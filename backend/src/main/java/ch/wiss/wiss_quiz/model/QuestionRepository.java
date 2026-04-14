@@ -9,6 +9,10 @@ import java.util.List;
 
 public interface QuestionRepository extends CrudRepository<Question, Integer> {
 
+    // Override findAll to return List instead of Iterable
+    @Override
+    List<Question> findAll();
+
     List<Question> findByCategory(Category category);
 
 }

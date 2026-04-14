@@ -92,21 +92,19 @@ public class CleanCodeTrainingExamples {
     }
 
     // Schlechte Parameter-Namen + unnötige Abkürzungen
-    public boolean chk(int a, int b) {
+    public boolean check(int a, int b) {
         return a > b;
     }
 
     // Schlechte Fehlerbehandlung + unklare Logik
     public int divide(int a, int b) {
-        int result = 0;
 
         try {
-            result = a / b;
+            return a / b;
         } catch (Exception e) {
-            log.info("Error");
+            log.info("Error: {}", String.valueOf(e));
+            return 0;
         }
-
-        return result;
     }
 
     // Unnötige Komplexität + schlechte Lesbarkeit
