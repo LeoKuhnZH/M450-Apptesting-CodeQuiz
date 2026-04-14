@@ -1,5 +1,5 @@
 import React from 'react';
-import logo from "./components/Bilder/Wer wird Millionär Wiss Quiz Edition.png";
+import logo from "./components/Bilder/Wer wird Millionär Wiss Quiz Edition (2).png";
 
 class Home extends React.Component {
     constructor(props) {
@@ -12,7 +12,7 @@ class Home extends React.Component {
                 
                 <img
                     src={logo}
-                    alt="Wer wird Millionär Wiss Quiz Edition"
+                    alt="Wer wird Millionär Wiss Quiz Edition (2).png"
                     style={{ width: "500px", marginBottom: "20px" }}
                 />
 
