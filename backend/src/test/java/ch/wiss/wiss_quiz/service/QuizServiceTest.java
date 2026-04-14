@@ -1,14 +1,19 @@
 package ch.wiss.wiss_quiz.service;
 
-import ch.wiss.wiss_quiz.model.Answer;
-import ch.wiss.wiss_quiz.model.Question;
-import org.junit.jupiter.api.BeforeEach;
-import org.junit.jupiter.api.Test;
+import static org.junit.jupiter.api.Assertions.*;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.stream.Stream;
 
-import static org.junit.jupiter.api.Assertions.*;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
+import org.junit.jupiter.params.ParameterizedTest;
+import org.junit.jupiter.params.provider.Arguments;
+import org.junit.jupiter.params.provider.MethodSource;
+
+import ch.wiss.wiss_quiz.model.Answer;
+import ch.wiss.wiss_quiz.model.Question;
 
 class QuizServiceTest {
 
@@ -132,111 +137,59 @@ class QuizServiceTest {
     }
 
     // Station 3 – Validierung von Quizfragen
-    @Test
-    void validateQuestionForQuiz_returnsFalse_whenQuestionIsNull() {
-        boolean result = service.validateQuestionForQuiz(null);
-
+    @ParameterizedTest(name = "{0}")
+    @MethodSource("invalidQuestionsProvider")
+    void validateQuestionForQuiz_returnsFalse_forInvalidQuestions(String description, Question question) {
+        boolean result = service.validateQuestionForQuiz(question);
         assertFalse(result);
     }
 
-    // Station 3 – Validierung von Quizfragen
-    @Test
-    void validateQuestionForQuiz_returnsFalse_whenQuestionTextIsNull() {
-        Question question = new Question();
-        question.setQuestionText(null);
-        question.setAnswers(createValidAnswers());
+    static Stream<Arguments> invalidQuestionsProvider() {
+        Question qTextNull = new Question();
+        qTextNull.setQuestionText(null);
+        qTextNull.setAnswers(createValidAnswers());
 
-        boolean result = service.validateQuestionForQuiz(question);
+        Question qTextBlank = new Question();
+        qTextBlank.setQuestionText("   ");
+        qTextBlank.setAnswers(createValidAnswers());
 
-        assertFalse(result);
-    }
+        Question qAnswersNull = new Question();
+        qAnswersNull.setQuestionText("Frage?");
 
-    // Station 3 – Validierung von Quizfragen
-    @Test
-    void validateQuestionForQuiz_returnsFalse_whenQuestionTextIsBlank() {
-        Question question = new Question();
-        question.setQuestionText("   ");
-        question.setAnswers(createValidAnswers());
+        Question qOneAnswer = new Question();
+        qOneAnswer.setQuestionText("Frage?");
+        qOneAnswer.setAnswers(List.of(createAnswer("Nur eine", true)));
 
-        boolean result = service.validateQuestionForQuiz(question);
+        Question qNullAnswer = new Question();
+        qNullAnswer.setQuestionText("Frage?");
+        List<Answer> answersWithNull = new ArrayList<>();
+        answersWithNull.add(createAnswer("A", true));
+        answersWithNull.add(null);
+        qNullAnswer.setAnswers(answersWithNull);
 
-        assertFalse(result);
-    }
+        Question qBlankAnswer = new Question();
+        qBlankAnswer.setQuestionText("Frage?");
+        qBlankAnswer.setAnswers(List.of(createAnswer(" ", true), createAnswer("B", false)));
 
-    // Station 3 – Validierung von Quizfragen
-    @Test
-    void validateQuestionForQuiz_returnsFalse_whenAnswersAreNull() {
-        Question question = new Question();
-        question.setQuestionText("Frage?");
+        Question qNoCorrect = new Question();
+        qNoCorrect.setQuestionText("Frage?");
+        qNoCorrect.setAnswers(List.of(createAnswer("A", false), createAnswer("B", false)));
 
-        boolean result = service.validateQuestionForQuiz(question);
+        Question qMultipleCorrect = new Question();
+        qMultipleCorrect.setQuestionText("Frage?");
+        qMultipleCorrect.setAnswers(List.of(createAnswer("A", true), createAnswer("B", true)));
 
-        assertFalse(result);
-    }
-
-    // Station 3 – Validierung von Quizfragen
-    @Test
-    void validateQuestionForQuiz_returnsFalse_whenLessThanTwoAnswersExist() {
-        Question question = new Question();
-        question.setQuestionText("Frage?");
-        question.setAnswers(List.of(createAnswer("Nur eine", true)));
-
-        boolean result = service.validateQuestionForQuiz(question);
-
-        assertFalse(result);
-    }
-
-    // Station 3 – Validierung von Quizfragen
-    @Test
-    void validateQuestionForQuiz_returnsFalse_whenAnswerIsNull() {
-        Question question = new Question();
-        question.setQuestionText("Frage?");
-
-        List<Answer> answers = new ArrayList<>();
-        answers.add(createAnswer("A", true));
-        answers.add(null);
-
-        question.setAnswers(answers);
-
-        boolean result = service.validateQuestionForQuiz(question);
-
-        assertFalse(result);
-    }
-
-    // Station 3 – Validierung von Quizfragen
-    @Test
-    void validateQuestionForQuiz_returnsFalse_whenAnswerTextIsBlank() {
-        Question question = new Question();
-        question.setQuestionText("Frage?");
-        question.setAnswers(List.of(createAnswer(" ", true), createAnswer("B", false)));
-
-        boolean result = service.validateQuestionForQuiz(question);
-
-        assertFalse(result);
-    }
-
-    // Station 3 – Validierung von Quizfragen
-    @Test
-    void validateQuestionForQuiz_returnsFalse_whenNoCorrectAnswerExists() {
-        Question question = new Question();
-        question.setQuestionText("Frage?");
-        question.setAnswers(List.of(createAnswer("A", false), createAnswer("B", false)));
-
-        boolean result = service.validateQuestionForQuiz(question);
-
-        assertFalse(result);
-    }
-
-    // Station 3 – Validierung von Quizfragen
-    @Test
-    void validateQuestionForQuiz_returnsFalse_whenMultipleCorrectAnswersExist() {
-        Question question = new Question();
-        question.setQuestionText("Frage?");
-        question.setAnswers(List.of(createAnswer("A", true), createAnswer("B", true)));
-
-        boolean result = service.validateQuestionForQuiz(question);
-
-        assertFalse(result);
+        return Stream.of(
+                Arguments.of("whenQuestionIsNull", null),
+                Arguments.of("whenQuestionTextIsNull", qTextNull),
+                Arguments.of("whenQuestionTextIsBlank", qTextBlank),
+                Arguments.of("whenAnswersAreNull", qAnswersNull),
+                Arguments.of("whenLessThanTwoAnswersExist", qOneAnswer),
+                Arguments.of("whenAnswerIsNull", qNullAnswer),
+                Arguments.of("whenAnswerTextIsBlank", qBlankAnswer),
+                Arguments.of("whenNoCorrectAnswerExists", qNoCorrect),
+                Arguments.of("whenMultipleCorrectAnswersExist", qMultipleCorrect)
+        );
     }
 
     // Station 3 – Validierung von Quizfragen
@@ -287,14 +240,14 @@ class QuizServiceTest {
         assertEquals(2, result);
     }
 
-    private List<Answer> createValidAnswers() {
+    private static List<Answer> createValidAnswers() {
         return List.of(
                 createAnswer("A", true),
                 createAnswer("B", false)
         );
     }
 
-    private Answer createAnswer(String text, boolean correct) {
+    private static Answer createAnswer(String text, boolean correct) {
         Answer answer = new Answer();
         answer.setQuestionAnswer(text);
         answer.setCorrect(correct);
