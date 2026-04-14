@@ -5,4 +5,4 @@
 3. run MySQL container: `docker run -d --name wissquiz_db --network mynet123 -e MYSQL_ROOT_PASSWORD=schnappie -d wissquiz_db:1.0`
 
 4. create Spring-Backend Docker image (within root folder): `docker build -t wissquiz_rest:0.1 .`
-4. deploy Spring-Backend Docker image: `docker run -d --name wissquiz_api -p 8080:8080 -e MYSQL_HOST=wissquiz_db --network mynet123 wissquiz_rest:0.1`
+5. deploy Spring-Backend Docker image: `docker run -d --name wissquiz_api -p 8080:8080 -e MYSQL_HOST=wissquiz_db --network mynet123 wissquiz_rest:0.1`
