@@ -1,5 +1,10 @@
 package ch.wiss.wiss_quiz.selenium;
 
+import static org.junit.jupiter.api.Assertions.*;
+
+import java.time.Duration;
+import java.util.List;
+
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -11,11 +16,6 @@ import org.openqa.selenium.chrome.ChromeOptions;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.Select;
 import org.openqa.selenium.support.ui.WebDriverWait;
-
-import java.time.Duration;
-import java.util.List;
-
-import static org.junit.jupiter.api.Assertions.*;
 
 class SeleniumTest {
 
@@ -102,7 +102,7 @@ class SeleniumTest {
         // 3. Hole den Next-Button
         wait.until(ExpectedConditions.visibilityOfElementLocated(
                 By.cssSelector("[data-testid='next-button']")
-        ));
+            ));
 
         // 4. Prüfe, dass er sichtbar ist
         String bodyText = driver.findElement(By.tagName("body")).getText();
